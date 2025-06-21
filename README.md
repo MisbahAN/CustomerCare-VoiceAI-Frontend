@@ -1,109 +1,97 @@
 # CustomerCare-VoiceAI Frontend
 
-The React-based frontend for the CustomerCare-VoiceAI platform, providing an intuitive interface for AI-powered customer service training and conversation simulation. Now featuring a beautiful matcha/pistachio theme with glassmorphism effects and enhanced user experience.
+The React-based frontend for the CustomerCare-VoiceAI platform, providing an intuitive interface for AI-powered customer service training and conversation simulation. Features a beautiful matcha/pistachio theme with glassmorphism effects and real-time voice communication.
+
+## 🌐 Live Demo
+
+- **Frontend**: [https://customer-care-voice-ai-frontend.vercel.app/](https://customer-care-voice-ai-frontend.vercel.app/)
+- **Backend API**: [https://customercare-voiceai-backend.onrender.com](https://customercare-voiceai-backend.onrender.com)
 
 ## 🌟 Features
 
-- 🎨 **Modern UI/UX** – Built with React 18, TypeScript, and Tailwind CSS with fresh matcha/pistachio design
-- 💬 **Real-time Chat Interface** – Seamless conversation experience with Socket.io and agent avatars
-- 🎤 **Voice Communication** – Integrated voice calls using LiveKit
-- 📊 **Analytics Dashboard** – Comprehensive performance tracking and insights with enhanced visuals
-- 🤖 **Agent Management** – Create and customize AI support agents with avatar upload
-- 📱 **Responsive Design** – Mobile-first approach with elegant glassmorphism animations
+- 🎨 **Modern UI/UX** – Built with React 18, TypeScript, and Tailwind CSS with matcha/pistachio design
+- 💬 **Real-time Chat Interface** – Seamless conversation experience with Socket.io
+- 🎤 **Voice Communication** – Integrated voice calls using LiveKit with real-time audio
+- 🔊 **Advanced Audio Processing** – Support for both blob audio data and traditional audio URLs
+- 📊 **Analytics Dashboard** – Comprehensive performance tracking with Chart.js visualizations
+- 🤖 **Agent Management** – Create and customize AI support agents
+- 📱 **Responsive Design** – Mobile-first approach with glassmorphism animations
 - 🔐 **Secure Authentication** – JWT-based user authentication system
-- 📈 **Real-time Updates** – Live conversation updates and notifications
-- 👤 **Avatar System** – Visual agent representation with upload functionality
+- 📈 **Real-time Updates** – Live conversation updates and typing indicators
 - 🌿 **Matcha Theme** – Calming nature-inspired design with accessibility focus
 
 ## ⚙️ Tech Stack
 
-| Category        | Technology                                |
-| --------------- | ----------------------------------------- |
-| **Framework**   | React 18 with TypeScript                  |
-| **Styling**     | Tailwind CSS with Headless UI components  |
-| **Theme**       | Custom matcha/pistachio design system     |
-| **Routing**     | React Router DOM v6                       |
-| **State Mgmt**  | React Context API + Custom Hooks          |
-| **Real-time**   | Socket.io Client, LiveKit Client          |
-| **HTTP Client** | Axios for API communication               |
-| **Charts**      | Chart.js with React wrapper               |
-| **Icons**       | Heroicons                                 |
-| **Build Tool**  | Create React App with Craco configuration |
+| Category        | Technology                               |
+| --------------- | ---------------------------------------- |
+| **Framework**   | React 18 with TypeScript                 |
+| **Styling**     | Tailwind CSS with Headless UI components |
+| **Theme**       | Custom matcha/pistachio design system    |
+| **Routing**     | React Router DOM v6                      |
+| **State Mgmt**  | React Context API + Custom Hooks         |
+| **Real-time**   | Socket.io Client, LiveKit Client         |
+| **HTTP Client** | Axios for API communication              |
+| **Charts**      | Chart.js with React wrapper              |
+| **Icons**       | Heroicons                                |
+| **Build Tool**  | Create React App with React Scripts      |
 
 ## 🎨 Design System
 
-### New Matcha/Pistachio Theme
+### Matcha/Pistachio Theme
 
-The frontend has been completely redesigned with a fresh, modern aesthetic:
+The frontend features a modern, calming aesthetic:
 
 **Color Palette:**
 
-- **Primary Matcha**: `#819A91` - Used for primary buttons and accents
-- **Secondary Sage**: `#6B8A7A` - Used for hover states and secondary elements
-- **Accent Pistachio**: `#A7C1A8` - Used for highlights and success states
+- **Primary Matcha**: `#819A91` - Primary buttons and accents
+- **Secondary Sage**: `#6B8A7A` - Hover states and secondary elements
+- **Accent Pistachio**: `#7FB069` - Highlights and success states
 - **Background Gradient**: `#F5F7F0` to `#E8F0E3` to `#EBFFD8` - Light, warm backgrounds
-- **Text Dark Green**: `#2C3E2D` - Primary text color for excellent readability
-- **Error Coral**: `#E07B67` - Muted coral for error states and warnings
+- **Text Dark Green**: `#2C3E2D` - Primary text color for readability
+- **Error Coral**: `#E07B67` - Error states and warnings
 
 **Design Features:**
 
 - **Glassmorphism Effects**: Translucent elements with backdrop blur
 - **Natural Colors**: Earth-tones inspired by matcha and pistachio
-- **Smooth Animations**: Updated glow effects and gradient animations
+- **Smooth Animations**: Glow effects and gradient animations
 - **High Contrast**: Excellent readability and accessibility
-- **Mobile-First**: Responsive design that works beautifully on all devices
-
-### Avatar System
-
-- **Agent Avatars**: Each AI agent now has a visual avatar displayed in conversations
-- **Upload Functionality**: Users can upload custom avatar images for their agents
-- **Default Avatars**: Beautiful pre-designed avatars for built-in company agents
-- **Responsive Display**: Avatars adapt seamlessly to different screen sizes
+- **Mobile-First**: Responsive design for all devices
 
 ## 🛠 Project Structure
 
 ```
-frontend/
-├── public/                   # Static assets
-│   ├── index.html            # Main HTML template
-│   ├── favicon.ico           # App favicon
-│   ├── manifest.json         # PWA manifest
-│   └── avatars/              # Default agent avatars
-├── src/
-│   ├── components/           # Reusable React components
-│   │   ├── Navbar.tsx        # Navigation bar with matcha theme
-│   │   └── ProtectedRoute.tsx # Route protection with styled loading
-│   ├── pages/                # Page components (all with new design)
-│   │   ├── Dashboard.tsx     # User dashboard with matcha styling and glass cards
-│   │   ├── Login.tsx         # Authentication page with new theme
-│   │   ├── Register.tsx      # User registration with glassmorphism
-│   │   ├── Agents.tsx        # Agent management with avatar support
-│   │   ├── CreateAgent.tsx   # Agent creation form with avatar upload
-│   │   ├── EditAgent.tsx     # Agent editing with avatar management
-│   │   ├── AgentCall.tsx     # Voice call with agent and avatar display
-│   │   ├── AgentHistory.tsx  # Agent conversation history with new design
-│   │   ├── LiveCall.tsx      # Live voice call interface
-│   │   ├── CallSimulator.tsx # Call simulation with enhanced UI
-│   │   ├── Conversations.tsx # Conversation management with matcha theme
-│   │   ├── ConversationList.tsx # List of conversations with new styling
-│   │   └── ConversationDetail.tsx # Individual conversation view
-│   ├── contexts/             # React contexts
-│   │   ├── AuthContext.tsx   # User authentication state
-│   │   └── LiveKitContext.tsx # Voice call state management
-│   ├── types/                # TypeScript interfaces
-│   │   ├── conversation.ts   # Conversation types
-│   │   └── global.d.ts       # Global type definitions
-│   ├── styles/               # CSS files and animations
-│   │   ├── index.css         # Global styles with matcha theme
-│   │   └── animations.css    # Updated glow effects and gradient animations
-│   ├── App.tsx               # Main application component
-│   ├── index.tsx             # React DOM entry point
-│   └── App.test.tsx          # Application tests
-├── package.json              # Dependencies and scripts
-├── tailwind.config.js        # Tailwind CSS configuration
-├── tsconfig.json             # TypeScript configuration
-├── craco.config.js           # Create React App configuration
-└── README.md                 # This file
+src/
+├── components/           # Reusable React components
+│   ├── Navbar.tsx        # Navigation bar with matcha theme
+│   └── ProtectedRoute.tsx # Route protection component
+├── pages/                # Page components
+│   ├── Dashboard.tsx     # User dashboard with analytics
+│   ├── Login.tsx         # Authentication page
+│   ├── Register.tsx      # User registration
+│   ├── Agents.tsx        # Agent management
+│   ├── CreateAgent.tsx   # Agent creation form
+│   ├── EditAgent.tsx     # Agent editing
+│   ├── AgentCall.tsx     # Voice call with agent
+│   ├── AgentHistory.tsx  # Agent conversation history
+│   ├── LiveCall.tsx      # Live voice call interface
+│   ├── CallSimulator.tsx # Call simulation
+│   ├── Conversations.tsx # Conversation management
+│   ├── ConversationList.tsx # Conversation list view
+│   └── ConversationDetail.tsx # Individual conversation view
+├── contexts/             # React contexts
+│   ├── AuthContext.tsx   # User authentication state
+│   └── LiveKitContext.tsx # Voice call state management
+├── types/                # TypeScript interfaces
+│   ├── conversation.ts   # Conversation and message types
+│   └── global.d.ts       # Global type definitions
+├── styles/               # CSS files and animations
+│   └── animations.css    # Glassmorphism effects and animations
+├── config/               # Configuration files
+│   └── api.ts           # API configuration and URL helpers
+├── App.tsx               # Main application component
+├── index.tsx             # React DOM entry point
+└── index.css             # Global styles with matcha theme
 ```
 
 ## 🚀 Getting Started
@@ -111,26 +99,15 @@ frontend/
 ### Prerequisites
 
 - Node.js 16+ and npm
-- Backend server running on `http://localhost:5001`
-
-### Process Cleanup Script
-
-**⚠️ Important**: Before starting the project, run this cleanup script to avoid port conflicts:
-
-```bash
-# Kill all nodemon and Node.js processes
-pkill -f "nodemon|react-scripts|ts-node"
-
-# Or use specific port cleanup:
-lsof -ti:3000 | xargs kill -9  # Kill frontend processes
-```
+- Backend server running (see deployment URLs above)
 
 ### Installation
 
-1. **Navigate to frontend directory**
+1. **Clone and navigate to the repository**
 
    ```bash
-   cd frontend
+   git clone <repository-url>
+   cd CustomerCare-VoiceAI-Frontend
    ```
 
 2. **Install dependencies**
@@ -141,12 +118,18 @@ lsof -ti:3000 | xargs kill -9  # Kill frontend processes
 
 3. **Create environment file**
 
-   Create `.env` in the frontend directory:
+   Create `.env` in the root directory:
+
+   ```env
+   REACT_APP_API_URL=https://customercare-voiceai-backend.onrender.com
+   REACT_APP_SOCKET_URL=https://customercare-voiceai-backend.onrender.com
+   ```
+
+   For local development:
 
    ```env
    REACT_APP_API_URL=http://localhost:5001
    REACT_APP_SOCKET_URL=http://localhost:5001
-   REACT_APP_LIVEKIT_URL=wss://your-livekit-server.com
    ```
 
 4. **Start development server**
@@ -157,56 +140,61 @@ lsof -ti:3000 | xargs kill -9  # Kill frontend processes
 
    The application will be available at `http://localhost:3000`
 
-   **Note**: You'll immediately notice the beautiful new matcha/pistachio theme with glassmorphism effects throughout the interface.
-
 ## 🎯 Key Components
 
 ### Authentication System
 
-The frontend implements a complete authentication flow with the new design:
+Complete authentication flow with modern design:
 
-- **Login/Register**: User authentication with glassmorphism form design
-- **Protected Routes**: Route guards for authenticated users with styled loading states
-- **Token Management**: Automatic token refresh and storage
+- **Login/Register**: User authentication with glassmorphism forms
+- **Protected Routes**: Route guards for authenticated users
+- **Token Management**: Automatic JWT token refresh and storage
 - **Context Provider**: Global authentication state management
 
 ### Chat Interface
 
-Real-time chat functionality with enhanced visuals:
+Real-time chat functionality:
 
-- **Message Display**: Threaded conversation view with agent avatars
-- **Avatar Integration**: Visual agent representation in conversations
+- **Message Display**: Threaded conversation view
 - **Typing Indicators**: Live typing status with matcha-themed animations
-- **Sentiment Analysis**: Visual sentiment indicators with new color scheme
+- **Audio Playback**: Support for both base64 audio data and URL-based audio
 - **Message History**: Conversation persistence with beautiful styling
-- **Agent Switching**: Dynamic agent selection with avatar preview
+- **Agent Interaction**: Dynamic conversation with AI agents
 
 ### Voice Communication
 
-Integrated voice calling features with updated design:
+Integrated voice calling features:
 
 - **LiveKit Integration**: Real-time voice communication
-- **Audio Controls**: Microphone and speaker management with matcha styling
-- **Participant Management**: Multi-user voice rooms with enhanced UI
-- **Connection Status**: Real-time connection monitoring with new visual indicators
+- **Audio Controls**: Microphone and speaker management
+- **Participant Management**: Multi-user voice rooms
+- **Connection Status**: Real-time connection monitoring
+
+### Audio Processing
+
+Advanced audio handling capabilities:
+
+- **Blob Audio Support**: Converts base64 audio data to playable blobs
+- **Backward Compatibility**: Supports both new blob format and legacy audio URLs
+- **Real-time Playback**: Seamless audio streaming during conversations
+- **Cross-browser Support**: Compatible audio playback across different browsers
 
 ### Dashboard Analytics
 
-Comprehensive analytics interface with glassmorphism design:
+Comprehensive analytics interface:
 
-- **Performance Metrics**: Conversation statistics in beautiful glass cards
-- **Charts and Graphs**: Visual data representation with matcha color scheme
+- **Performance Metrics**: Conversation statistics in glass cards
+- **Charts and Graphs**: Visual data representation with Chart.js
 - **Recent Activity**: Activity feed with enhanced readability
-- **Progress Tracking**: User improvement metrics with modern styling
+- **Progress Tracking**: User improvement metrics
 
 ### Agent Management
 
-Create and manage AI agents with avatar support:
+Create and manage AI agents:
 
-- **Agent Creation**: Custom agent personality setup with avatar upload
-- **Avatar Management**: Image upload with preview and validation
-- **Personality Configuration**: Behavior and response settings in styled forms
-- **Agent Testing**: Preview agent responses with avatar display
+- **Agent Creation**: Custom agent personality setup
+- **Personality Configuration**: Behavior and response settings
+- **Agent Testing**: Preview agent responses
 - **Visual Cards**: Beautiful agent cards with glassmorphism effects
 
 ## 🔧 Development
@@ -216,51 +204,26 @@ Create and manage AI agents with avatar support:
 ```bash
 # Development
 npm start              # Start development server
-npm run build          # Build for production
-npm run test           # Run tests
-npm run lint           # Run ESLint
-npm run lint:fix       # Fix ESLint issues
+npm run dev           # Start development server without opening browser
+npm run build         # Build for production
+npm run eject         # Eject from Create React App (irreversible)
 ```
 
 ### Environment Variables
 
 ```env
 # API Configuration
-REACT_APP_API_URL=http://localhost:5001          # Backend API URL
-REACT_APP_SOCKET_URL=http://localhost:5001       # Socket.io server URL
-
-# LiveKit Configuration
-REACT_APP_LIVEKIT_URL=wss://your-livekit-server.com  # LiveKit server URL
-
-# Optional Configuration
-REACT_APP_DEBUG=true                             # Enable debug mode
-REACT_APP_VERSION=$npm_package_version           # App version
+REACT_APP_API_URL=https://customercare-voiceai-backend.onrender.com   # Backend API URL
+REACT_APP_SOCKET_URL=https://customercare-voiceai-backend.onrender.com # Socket.io server URL
 ```
 
 ### Code Style and Standards
 
 - **TypeScript**: Strict type checking enabled
-- **ESLint**: Airbnb configuration with custom rules
-- **Prettier**: Consistent code formatting
-- **Tailwind CSS**: Utility-first styling approach with custom matcha theme
+- **ESLint**: React app configuration with TypeScript support
+- **Tailwind CSS**: Utility-first styling with custom matcha theme
 - **Component Architecture**: Functional components with hooks
-- **Design System**: Consistent use of matcha color palette and glassmorphism
-
-### Testing
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm test -- --watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test -- App.test.tsx
-```
+- **Design System**: Consistent matcha color palette and glassmorphism
 
 ## 🎨 UI/UX Design
 
@@ -268,101 +231,73 @@ npm test -- App.test.tsx
 
 - **Matcha Color Palette**: Calming, nature-inspired colors
 - **Glassmorphism**: Modern translucent design elements
-- **Typography**: Clear, readable font hierarchy with dark green text
+- **Typography**: Clear, readable font hierarchy
 - **Spacing**: Consistent Tailwind CSS spacing scale
-- **Components**: Reusable UI component library with matcha styling
+- **Components**: Reusable UI components with matcha styling
 - **Animations**: Smooth transitions and micro-interactions
 
 ### Accessibility
 
-- **High Contrast**: Dark green text on light backgrounds for excellent readability
-- **Color Blindness**: Accessible color combinations tested
+- **High Contrast**: Dark green text on light backgrounds
+- **Color Blindness**: Accessible color combinations
 - **Screen Readers**: Proper ARIA labels and semantic HTML
 - **Keyboard Navigation**: Full keyboard accessibility
-- **Touch Targets**: Appropriately sized touch targets for mobile
+- **Touch Targets**: Appropriately sized touch targets
 
 ### Responsive Design
 
 - **Mobile-First**: Designed for mobile devices first
 - **Breakpoints**: Tailwind CSS responsive breakpoints
 - **Touch-Friendly**: Optimized for touch interactions
-- **Fluid Layouts**: Adapts beautifully to all screen sizes
-
-### Key UI Features
-
-- **Loading States**: Skeleton screens and spinners with matcha styling
-- **Error Handling**: User-friendly error messages with coral accents
-- **Form Validation**: Real-time validation feedback with glassmorphism
-- **Notifications**: Toast notifications with matcha color scheme
-- **Avatar Displays**: Seamless avatar integration throughout the interface
+- **Fluid Layouts**: Adapts to all screen sizes
 
 ## 🔍 Performance Optimization
 
 ### Bundle Optimization
 
-- **Code Splitting**: Route-based code splitting
-- **Lazy Loading**: Dynamic imports for heavy components
-- **Tree Shaking**: Remove unused code
-- **Image Optimization**: Optimized avatar and image loading
+- **Code Splitting**: Route-based code splitting with React.lazy
+- **Tree Shaking**: Automatic removal of unused code
+- **Image Optimization**: Optimized asset loading
 
 ### Runtime Performance
 
-- **React.memo**: Prevent unnecessary re-renders
-- **useMemo/useCallback**: Optimize expensive computations
-- **Virtual Scrolling**: Efficient large list rendering
-- **Debouncing**: Optimize API calls and user input
+- **React.memo**: Prevents unnecessary re-renders
+- **useMemo/useCallback**: Optimizes expensive computations
+- **Debouncing**: Optimizes API calls and user input
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Build Errors**
+1. **Socket Connection Issues**
+
+   ```bash
+   # Check backend server status
+   curl https://customercare-voiceai-backend.onrender.com/health
+
+   # Verify environment variables
+   echo $REACT_APP_SOCKET_URL
+   ```
+
+2. **Audio Playback Issues**
+
+   - Check browser permissions for audio playback
+   - Verify audio data format (base64 or URL)
+   - Ensure backend audio endpoints are accessible
+
+3. **LiveKit Connection Problems**
+
+   - Verify LiveKit server is accessible
+   - Check browser permissions for microphone
+   - Ensure WebRTC is enabled in browser
+
+4. **Build Issues**
 
    ```bash
    # Clear cache and reinstall
    npm cache clean --force
    rm -rf node_modules package-lock.json
    npm install
-   ```
-
-2. **Design/Styling Issues**
-
-   ```bash
-   # Clear browser cache if old styles persist
-   # Check console for CSS compilation errors
-   # Ensure Tailwind CSS classes are properly applied
-   ```
-
-3. **Avatar Upload Issues**
-
-   - Check file size limits (default: 5MB)
-   - Verify supported file formats (PNG, JPG, JPEG, GIF)
-   - Ensure backend avatar endpoints are accessible
-
-4. **Socket Connection Issues**
-
-   ```bash
-   # Check backend server is running
-   curl http://localhost:5001/health
-
-   # Verify environment variables
-   echo $REACT_APP_SOCKET_URL
-   ```
-
-5. **LiveKit Connection Problems**
-
-   - Verify LiveKit server is accessible
-   - Check browser permissions for microphone
-   - Ensure WebRTC is enabled in browser
-
-6. **TypeScript Errors**
-
-   ```bash
-   # Run type checking
-   npm run type-check
-
-   # Fix common issues
-   npm run lint:fix
    ```
 
 ## 📚 API Integration
@@ -386,31 +321,25 @@ POST /api/auth/register
 }
 ```
 
-### Agent Management API (Enhanced)
+### Agent Management API
 
 ```typescript
 // Get user agents
 GET /api/agents
 
-// Create agent with avatar
+// Create agent
 POST /api/agents
-FormData: {
+{
   "name": "Support Agent",
   "company": "TechCorp",
   "personality": "friendly",
-  "avatar": File // Image file upload
+  "companyInfo": "Technology company"
 }
 
 // Update agent
 PUT /api/agents/:id
 {
   "name": "Updated Agent Name"
-}
-
-// Upload/update agent avatar
-POST /api/agents/:id/avatar
-FormData: {
-  "avatar": File // Image file
 }
 ```
 
@@ -429,9 +358,25 @@ POST /api/conversations
   "agentId": "agent123",
   "title": "Customer Support"
 }
+```
 
-// Get user statistics
-GET /api/conversations/stats/user/:userId
+### Audio API
+
+The frontend supports both audio formats:
+
+```typescript
+// New format (base64 blob)
+{
+  "message": "Hello",
+  "audioData": "base64audiostring",
+  "audioType": "audio/mpeg"
+}
+
+// Legacy format (URL-based)
+{
+  "message": "Hello",
+  "audioUrl": "/audio/response-123.mp3"
+}
 ```
 
 ## 🛣️ Future Enhancements
@@ -440,51 +385,64 @@ GET /api/conversations/stats/user/:userId
 
 - [ ] **Dark Mode Toggle**: Alternative to the matcha theme
 - [ ] **PWA Features**: Offline support and push notifications
-- [ ] **Advanced Analytics**: More detailed performance metrics with enhanced visuals
+- [ ] **Advanced Analytics**: More detailed performance metrics
 - [ ] **Multi-language**: Internationalization support
-- [ ] **Custom Themes**: User-customizable color schemes
 - [ ] **Export Features**: Conversation export functionality
-- [ ] **Avatar AI Generation**: AI-powered avatar creation
-- [ ] **Enhanced Accessibility**: Advanced screen reader support
 
 ### Technical Improvements
 
-- [ ] **State Management**: Migrate to Redux Toolkit
-- [ ] **Testing**: Increase test coverage to 90%+
-- [ ] **Performance**: Implement service workers
+- [ ] **Testing**: Comprehensive test suite with Jest and React Testing Library
+- [ ] **State Management**: Consider Redux Toolkit for complex state
+- [ ] **Performance**: Implement service workers for caching
 - [ ] **Security**: Enhanced CSP and security headers
-- [ ] **Monitoring**: Error tracking and analytics
-- [ ] **Animation Library**: More sophisticated animations
-- [ ] **Component Library**: Publish reusable component package
+- [ ] **Monitoring**: Error tracking and analytics integration
 
-## 📖 Design Documentation
+## 📖 Technology Deep Dive
 
-### Component Library
+### React Context Architecture
 
-The frontend includes a comprehensive component library with:
+The application uses a well-structured Context API setup:
 
-- **Glass Cards**: Reusable glassmorphism containers
-- **Matcha Buttons**: Consistent button styling with hover effects
-- **Avatar Components**: Flexible avatar display components
-- **Form Elements**: Styled inputs, selects, and textareas
-- **Loading States**: Skeleton screens and spinners
-- **Navigation**: Consistent navigation components
+- **AuthContext**: Manages user authentication, JWT tokens, and user session
+- **LiveKitContext**: Handles voice communication state and WebRTC connections
 
-### Theme Customization
+### TypeScript Integration
 
-The matcha theme can be customized by modifying:
+Strong typing throughout the application:
 
-```css
-/* Custom CSS variables in index.css */
-:root {
-  --matcha-primary: #819a91;
-  --matcha-secondary: #6b8a7a;
-  --matcha-accent: #a7c1a8;
-  --matcha-background: #f5f7f0;
-  --matcha-text: #2c3e2d;
-  --matcha-error: #e07b67;
-}
+- **Message Types**: Comprehensive interfaces for conversation data
+- **API Types**: Typed API responses and requests
+- **Component Props**: Fully typed component interfaces
+
+### Audio Processing
+
+Advanced audio handling with dual format support:
+
+```typescript
+// Audio blob creation from base64
+const createAudioUrl = (audioData: string, audioType: string): string => {
+  const audioBlob = new Blob(
+    [Uint8Array.from(atob(audioData), (c) => c.charCodeAt(0))],
+    { type: audioType }
+  );
+  return URL.createObjectURL(audioBlob);
+};
 ```
+
+---
+
+## 📊 Project Status
+
+- ✅ **Frontend**: Fully deployed and functional
+- ✅ **Backend**: Live API with real-time capabilities
+- ✅ **Authentication**: Complete JWT implementation
+- ✅ **Real-time Chat**: Socket.io integration working
+- ✅ **Voice Calls**: LiveKit integration functional
+- ✅ **Audio Processing**: Dual format support implemented
+- ✅ **Analytics**: Chart.js visualizations active
+- ✅ **Responsive Design**: Mobile-optimized interface
+
+**Overall Completion**: 95% - Production-ready application with comprehensive features and modern architecture.
 
 ## 👨‍💻 Author
 
