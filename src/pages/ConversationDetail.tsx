@@ -21,6 +21,11 @@ const ConversationDetail: React.FC = () => {
   const navigate = useNavigate();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const createAudioUrl = (audioData: string, audioType: string): string => {
+    const audioBlob = new Blob([Uint8Array.from(atob(audioData), c => c.charCodeAt(0))], { type: audioType });
+    return URL.createObjectURL(audioBlob);
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -175,20 +180,20 @@ const ConversationDetail: React.FC = () => {
                         </span>
                       </div>
                       <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                      {message.audioUrl && (
+                      {(message.audioData && message.audioType) || message.audioUrl ? (
                         <div className="mt-3">
                           <audio
                             controls
                             className="w-full h-8 rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300"
+                            src={message.audioData && message.audioType ? createAudioUrl(message.audioData, message.audioType) : `${getApiUrl("")}${message.audioUrl}`}
                             onPlay={() => handleAudioPlay(`message-${index}`)}
                             onPause={handleAudioEnd}
                             onEnded={handleAudioEnd}
                           >
-                            <source src={`${getApiUrl("")}${message.audioUrl}`} type="audio/wav" />
                             Your browser does not support the audio element.
                           </audio>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   </div>
 

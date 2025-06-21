@@ -11,6 +11,8 @@ interface Message {
   role: 'user' | 'assistant' | 'system';
   content: string;
   audioUrl?: string;
+  audioData?: string;
+  audioType?: string;
   timestamp?: Date;
 }
 
@@ -101,13 +103,18 @@ const AgentCall: React.FC = () => {
           role: data.welcomeMessage.role,
           content: data.welcomeMessage.content,
           timestamp: new Date(data.welcomeMessage.timestamp),
-          audioUrl: data.welcomeMessage.audioUrl
+          audioUrl: data.welcomeMessage.audioUrl,
+          audioData: data.welcomeMessage.audioData,
+          audioType: data.welcomeMessage.audioType
         };
         setMessages(prev => [...prev, welcomeMessage]);
 
         // Play welcome message audio
-        if (welcomeMessage.audioUrl) {
-          playAudioMessage(welcomeMessage.audioUrl);
+        if (welcomeMessage.audioData && welcomeMessage.audioType) {
+          const audioUrl = createAudioUrl(welcomeMessage.audioData, welcomeMessage.audioType);
+          playAudioMessage(audioUrl);
+        } else if (welcomeMessage.audioUrl) {
+          playAudioMessage(`${getApiUrl("")}${welcomeMessage.audioUrl}`);
         }
       }
     });
@@ -119,6 +126,8 @@ const AgentCall: React.FC = () => {
         role: 'assistant',
         content: data.message,
         audioUrl: data.audioUrl,
+        audioData: data.audioData,
+        audioType: data.audioType,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, aiMessage]);
@@ -126,8 +135,11 @@ const AgentCall: React.FC = () => {
       setIsProcessing(false);
 
       // Play AI response audio
-      if (data.audioUrl) {
-        playAudioMessage(data.audioUrl);
+      if (data.audioData && data.audioType) {
+        const audioUrl = createAudioUrl(data.audioData, data.audioType);
+        playAudioMessage(audioUrl);
+      } else if (data.audioUrl) {
+        playAudioMessage(`${getApiUrl("")}${data.audioUrl}`);
       }
     });
 
@@ -151,6 +163,11 @@ const AgentCall: React.FC = () => {
     };
   }, [agentState, user, navigate]);
 
+  const createAudioUrl = (audioData: string, audioType: string): string => {
+    const audioBlob = new Blob([Uint8Array.from(atob(audioData), c => c.charCodeAt(0))], { type: audioType });
+    return URL.createObjectURL(audioBlob);
+  };
+
   const playAudioMessage = (audioUrl: string) => {
     // Stop any currently playing audio
     const audioElements = document.getElementsByTagName('audio');
@@ -159,7 +176,7 @@ const AgentCall: React.FC = () => {
       audio.currentTime = 0;
     });
 
-    const audio = new Audio(`${getApiUrl("")}${audioUrl}`);
+    const audio = new Audio(audioUrl);
     audio.onplay = () => setIsAgentSpeaking(true);
     audio.onended = () => setIsAgentSpeaking(false);
     audio.onpause = () => setIsAgentSpeaking(false);
@@ -400,18 +417,18 @@ const AgentCall: React.FC = () => {
                     : 'bg-[#2C3E2D]/10 text-[#2C3E2D]'
                 }`}>
                   <p>{message.content}</p>
-                  {message.audioUrl && (
+                  {(message.audioData && message.audioType) || message.audioUrl ? (
                     <audio
                       controls
                       className="mt-2"
-                      src={`${getApiUrl("")}${message.audioUrl}`}
+                      src={message.audioData && message.audioType ? createAudioUrl(message.audioData, message.audioType) : `${getApiUrl("")}${message.audioUrl}`}
                       onPlay={() => message.role === 'assistant' && setIsAgentSpeaking(true)}
                       onPause={() => setIsAgentSpeaking(false)}
                       onEnded={() => setIsAgentSpeaking(false)}
                     >
                       Your browser does not support the audio element.
                     </audio>
-                  )}
+                  ) : null}
                 </div>
 
                 {message.role === 'user' && (

@@ -13,6 +13,8 @@ interface Message {
   role: 'user' | 'assistant' | 'system';
   timestamp: Date;
   audioUrl?: string;
+  audioData?: string;
+  audioType?: string;
 }
 
 interface DemoAgent {
@@ -101,6 +103,11 @@ const CallSimulator: React.FC = () => {
   // Add state for current company
   const [currentCompany, setCurrentCompany] = useState<string>('general');
 
+  const createAudioUrl = (audioData: string, audioType: string): string => {
+    const audioBlob = new Blob([Uint8Array.from(atob(audioData), c => c.charCodeAt(0))], { type: audioType });
+    return URL.createObjectURL(audioBlob);
+  };
+
   // Connect to socket.io
   useEffect(() => {
     const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || getApiUrl("");
@@ -126,7 +133,9 @@ const CallSimulator: React.FC = () => {
         content: data.message,
         role: 'assistant',
         timestamp: new Date(),
-        audioUrl: data.audioUrl
+        audioUrl: data.audioUrl,
+        audioData: data.audioData,
+        audioType: data.audioType
       });
 
       setIsProcessing(false);
@@ -136,7 +145,12 @@ const CallSimulator: React.FC = () => {
       setIsAgentSpeaking(true);
       
       // Play audio response
-      if (data.audioUrl) {
+      if (data.audioData && data.audioType) {
+        const audioUrl = createAudioUrl(data.audioData, data.audioType);
+        const audio = new Audio(audioUrl);
+        audio.onended = () => setIsAgentSpeaking(false);
+        audio.play();
+      } else if (data.audioUrl) {
         const audio = new Audio(`${getApiUrl("")}${data.audioUrl}`);
         audio.onended = () => setIsAgentSpeaking(false);
         audio.play();
@@ -155,11 +169,19 @@ const CallSimulator: React.FC = () => {
           content: data.welcomeMessage.content,
           role: 'assistant',
           timestamp: new Date(),
-          audioUrl: data.welcomeMessage.audioUrl
+          audioUrl: data.welcomeMessage.audioUrl,
+          audioData: data.welcomeMessage.audioData,
+          audioType: data.welcomeMessage.audioType
         });
 
         // Play welcome message audio
-        if (data.welcomeMessage.audioUrl) {
+        if (data.welcomeMessage.audioData && data.welcomeMessage.audioType) {
+          const audioUrl = createAudioUrl(data.welcomeMessage.audioData, data.welcomeMessage.audioType);
+          const audio = new Audio(audioUrl);
+          audio.onended = () => setIsAgentSpeaking(false);
+          setIsAgentSpeaking(true);
+          audio.play();
+        } else if (data.welcomeMessage.audioUrl) {
           const audio = new Audio(`${getApiUrl("")}${data.welcomeMessage.audioUrl}`);
           audio.onended = () => setIsAgentSpeaking(false);
           setIsAgentSpeaking(true);
@@ -431,20 +453,20 @@ const CallSimulator: React.FC = () => {
                       </span>
                     </div>
                     <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                    {message.audioUrl && (
+                    {(message.audioData && message.audioType) || message.audioUrl ? (
                       <div className="mt-3">
                         <audio
                           controls
                           className="w-full h-8 rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300"
+                          src={message.audioData && message.audioType ? createAudioUrl(message.audioData, message.audioType) : `${getApiUrl("")}${message.audioUrl}`}
                           onPlay={() => message.role === 'assistant' && setIsAgentSpeaking(true)}
                           onPause={() => setIsAgentSpeaking(false)}
                           onEnded={() => setIsAgentSpeaking(false)}
                         >
-                          <source src={`${getApiUrl("")}${message.audioUrl}`} type="audio/mp3" />
                           Your browser does not support the audio element.
                         </audio>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
 

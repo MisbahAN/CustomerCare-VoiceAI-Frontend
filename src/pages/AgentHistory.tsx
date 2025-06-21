@@ -18,6 +18,8 @@ interface Conversation {
     role: 'user' | 'assistant' | 'system';
     content: string;
     audioUrl?: string;
+    audioData?: string;
+    audioType?: string;
   }[];
 }
 

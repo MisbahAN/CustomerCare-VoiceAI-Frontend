@@ -20,4 +20,6 @@ export interface Message {
   content: string;
   timestamp: string;
   audioUrl?: string;
+  audioData?: string;
+  audioType?: string;
 } 
