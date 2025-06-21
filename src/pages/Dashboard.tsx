@@ -140,7 +140,9 @@ const Dashboard: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h2 className="text-xl font-semibold text-[#2C3E2D]">Your Stats</h2>
+                <h2 className="text-xl font-semibold text-[#2C3E2D]">
+                  Your Stats
+                </h2>
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
@@ -251,8 +253,9 @@ const Dashboard: React.FC = () => {
                   Ready to try out CustomerCare VoiceAI?
                 </h3>
                 <p className="text-[#5A6B5B]">
-                  Test out a conversation with Sigma, your personal guide from Zero to Hero.
-                  Use CustomerCare VoiceAI to build your own agent for your organization.
+                  Test out a conversation with Sigma, our customer service
+                  representative. Use CustomerCare VoiceAI to build your own
+                  agent for your organization.
                 </p>
               </div>
             </div>
