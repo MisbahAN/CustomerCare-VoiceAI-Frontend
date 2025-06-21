@@ -27,18 +27,41 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        if (!user?._id) return;
+        if (!user?._id) {
+          setLoading(false);
+          return;
+        }
+
+        console.log('🔍 Fetching stats for user:', user._id);
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('❌ No token found');
+          setLoading(false);
+          return;
+        }
 
         const response = await fetch(
-          getApiUrl(`/api/conversations/stats/user/${user._id}`)
+          getApiUrl(`/api/conversations/stats/user/${user._id}`),
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
         );
+
         if (!response.ok) {
-          throw new Error("Failed to fetch stats");
+          const errorData = await response.json();
+          console.error('❌ Stats fetch error:', errorData);
+          throw new Error(`Failed to fetch stats: ${response.status}`);
         }
+
         const data = await response.json();
+        console.log('✅ Stats fetched successfully:', data);
         setStats(data);
       } catch (error) {
-        console.error("Error fetching stats:", error);
+        console.error("❌ Error fetching stats:", error);
       } finally {
         setLoading(false);
       }
