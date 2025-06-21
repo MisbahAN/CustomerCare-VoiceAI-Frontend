@@ -57,7 +57,8 @@ const Conversations: React.FC = () => {
     const colors: { [key: string]: string } = {
       positive: 'bg-[#7FB069]/30 text-[#7FB069] border-[#7FB069]/30',
       neutral: 'bg-[#819A91]/30 text-[#819A91] border-[#819A91]/30',
-      negative: 'bg-[#E07B67]/30 text-[#E07B67] border-[#E07B67]/30'
+      negative: 'bg-[#E07B67]/30 text-[#E07B67] border-[#E07B67]/30',
+      urgent: 'bg-[#F59E0B]/30 text-[#F59E0B] border-[#F59E0B]/30'
     };
     return colors[sentiment] || colors.neutral;
   };
