@@ -54,22 +54,18 @@ const filterMessages = (messages: Message[]) => {
 
 // Add company-specific branding
 const getCompanyBranding = (company: string) => {
-  const defaultAvatar = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
-  </svg>`;
-  
-  const branding: { [key: string]: { color: string, name: string, bgColor: string, avatar: string } } = {
+  const branding: { [key: string]: { color: string, name: string, bgColor: string, avatarSrc: string } } = {
     'techcare solutions': {
       color: 'bg-[#819A91]',
       name: 'TechCare Solutions',
       bgColor: 'bg-[#819A91]',
-      avatar: defaultAvatar
+      avatarSrc: '/ai-avatar.svg'
     },
     'general': {
       color: 'bg-[#819A91]',
       name: 'Customer Support',
       bgColor: 'bg-[#819A91]',
-      avatar: defaultAvatar
+      avatarSrc: '/ai-avatar.svg'
     }
   };
 
@@ -408,7 +404,7 @@ const CallSimulator: React.FC = () => {
         </button>
         <div className={`flex items-center px-6 py-2 rounded-full bg-[#2C3E2D]/40 backdrop-blur-md border border-[#819A91]/30 shadow-lg transform transition-all duration-300 hover:scale-105 ${getCompanyBranding(currentCompany).color}`}>
           <div className="w-8 h-8 rounded-full overflow-hidden bg-white/80 p-1 mr-2 ring-2 ring-[#7FB069]/30">
-            <div className="w-full h-full text-[#F5F7F0]" dangerouslySetInnerHTML={{ __html: getCompanyBranding(currentCompany).avatar }} />
+            <img src={getCompanyBranding(currentCompany).avatarSrc} alt="AI Avatar" className="w-full h-full object-contain" />
           </div>
           <span className="text-lg font-medium text-[#F5F7F0]/90">
             {demoAgent ? `${demoAgent.name} - ${demoAgent.company}` : getCompanyBranding(currentCompany).name}
@@ -427,7 +423,7 @@ const CallSimulator: React.FC = () => {
               >
                 {message.role === 'assistant' && (
                   <div className={`relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ${getCompanyBranding(demoAgent?.company.toLowerCase() || 'general').bgColor} ring-2 ring-[#7FB069]/30 animate-scaleIn`}>
-                    <div className="w-full h-full p-1 text-[#F5F7F0]" dangerouslySetInnerHTML={{ __html: getCompanyBranding(demoAgent?.company.toLowerCase() || 'general').avatar }} />
+                    <img src={getCompanyBranding(demoAgent?.company.toLowerCase() || 'general').avatarSrc} alt="AI Avatar" className="w-full h-full object-contain p-1" />
                     {isAgentSpeaking && message.id === messages[messages.length - 1].id && (
                       <div className="absolute -bottom-1 -right-1 w-4 h-4">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7FB069] opacity-75"></span>
@@ -483,7 +479,7 @@ const CallSimulator: React.FC = () => {
             {isTyping && (
               <div className="flex justify-start items-end space-x-3 animate-fadeIn">
                 <div className={`w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ${getCompanyBranding(currentCompany).bgColor} ring-2 ring-[#7FB069]/30`}>
-                  <div className="w-full h-full p-1 text-[#F5F7F0]" dangerouslySetInnerHTML={{ __html: getCompanyBranding(currentCompany).avatar }} />
+                  <img src={getCompanyBranding(currentCompany).avatarSrc} alt="AI Avatar" className="w-full h-full object-contain p-1" />
                 </div>
                 <div className="bg-[#2C3E2D]/20 backdrop-blur-md rounded-2xl rounded-bl-sm px-6 py-4 border border-[#819A91]/30">
                   <div className="flex space-x-2">
