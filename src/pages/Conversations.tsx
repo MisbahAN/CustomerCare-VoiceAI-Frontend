@@ -75,7 +75,15 @@ const Conversations: React.FC = () => {
   const handleReanalyzeSentiment = async () => {
     setIsReanalyzing(true);
     try {
-      const response = await axios.post(getApiUrl('/api/conversations/reanalyze-sentiment'));
+      const response = await axios.post(
+        getApiUrl('/api/conversations/reanalyze-sentiment'),
+        {}, // Empty body
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
       console.log('Sentiment reanalysis result:', response.data);
       
       // Refresh conversations to show updated sentiments
