@@ -26,6 +26,7 @@ const Conversations: React.FC = () => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
+  const [isReanalyzing, setIsReanalyzing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,17 +72,55 @@ const Conversations: React.FC = () => {
     navigate(`/conversations/${id}`);
   };
 
+  const handleReanalyzeSentiment = async () => {
+    setIsReanalyzing(true);
+    try {
+      const response = await axios.post(getApiUrl('/api/conversations/reanalyze-sentiment'));
+      console.log('Sentiment reanalysis result:', response.data);
+      
+      // Refresh conversations to show updated sentiments
+      await fetchConversations();
+      
+      // Show success message (optional)
+      alert(`✅ Sentiment reanalyzed successfully! Updated ${response.data.updatedConversations} conversations.`);
+    } catch (error) {
+      console.error('Error reanalyzing sentiment:', error);
+      alert('❌ Failed to reanalyze sentiment. Please try again.');
+    } finally {
+      setIsReanalyzing(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F5F7F0] via-[#E8F0E3] to-[#EBFFD8] text-[#2C3E2D] p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold gradient-text animate-fadeIn">Conversation History</h1>
-          <button
-            onClick={() => navigate('/call-simulator')}
-            className="px-4 py-2 text-white bg-[#819A91] hover:bg-[#7FB069] rounded-lg transition-all duration-300"
-          >
-            Start New Call
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={handleReanalyzeSentiment}
+              disabled={isReanalyzing}
+              className="px-4 py-2 text-white bg-[#7FB069] hover:bg-[#819A91] rounded-lg transition-all duration-300 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isReanalyzing ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                  <span>Analyzing...</span>
+                </>
+              ) : (
+                <>
+                  <ChartBarIcon className="h-4 w-4" />
+                  <span>Reanalyze Sentiment</span>
+                </>
+              )}
+            </button>
+            <button
+              onClick={() => navigate('/call-simulator')}
+              className="px-4 py-2 text-white bg-[#819A91] hover:bg-[#7FB069] rounded-lg transition-all duration-300"
+            >
+              Start New Call
+            </button>
+          </div>
         </div>
 
         {isLoading ? (
