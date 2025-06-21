@@ -368,7 +368,7 @@ const AgentCall: React.FC = () => {
           </button>
         </div>
 
-        <div className="bg-[#2C3E2D]/30 backdrop-blur-xl rounded-xl border border-[#2C3E2D]/10 overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-xl rounded-xl border border-[#819A91]/20 overflow-hidden">
           <div className="h-[600px] overflow-y-auto p-6 space-y-4">
             {messages.map((message) => (
               <div

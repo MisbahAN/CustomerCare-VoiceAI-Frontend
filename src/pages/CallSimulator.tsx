@@ -374,7 +374,7 @@ const CallSimulator: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-[#F5F7F0] via-[#E8F0E3] to-[#EBFFD8]">
-      <div className="flex justify-between items-center p-4 bg-[#2C3E2D]/30 backdrop-blur-lg border-b border-[#819A91]/20">
+      <div className="flex justify-between items-center p-4 bg-white/80 backdrop-blur-lg border-b border-[#819A91]/20">
         <button
           onClick={() => navigate('/conversations')}
           className="text-[#2C3E2D]/80 hover:text-[#2C3E2D] flex items-center transition-all duration-300 hover:scale-105"
@@ -385,7 +385,7 @@ const CallSimulator: React.FC = () => {
           Back
         </button>
         <div className={`flex items-center px-6 py-2 rounded-full bg-[#2C3E2D]/40 backdrop-blur-md border border-[#819A91]/30 shadow-lg transform transition-all duration-300 hover:scale-105 ${getCompanyBranding(currentCompany).color}`}>
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-[#2C3E2D]/30 p-1 mr-2 ring-2 ring-[#7FB069]/30">
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-white/80 p-1 mr-2 ring-2 ring-[#7FB069]/30">
             <div className="w-full h-full text-[#F5F7F0]" dangerouslySetInnerHTML={{ __html: getCompanyBranding(currentCompany).avatar }} />
           </div>
           <span className="text-lg font-medium text-[#F5F7F0]/90">
@@ -475,7 +475,7 @@ const CallSimulator: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="flex items-center space-x-3 bg-[#2C3E2D]/30 backdrop-blur-xl p-6 rounded-2xl border border-[#819A91]/20">
+          <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-[#819A91]/20">
             <input
               type="text"
               value={inputMessage}

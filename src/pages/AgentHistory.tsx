@@ -95,7 +95,7 @@ const AgentHistory: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1 bg-[#2C3E2D]/30 backdrop-blur-xl rounded-xl border border-[#2C3E2D]/10 p-4 h-[calc(100vh-12rem)] overflow-y-auto">
+            <div className="lg:col-span-1 bg-white/80 backdrop-blur-xl rounded-xl border border-[#819A91]/20 p-4 h-[calc(100vh-12rem)] overflow-y-auto">
               <h2 className="text-lg font-semibold text-[#2C3E2D] mb-4">Conversations</h2>
               <div className="space-y-2">
                 {conversations.map((conversation) => (
@@ -117,7 +117,7 @@ const AgentHistory: React.FC = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-2 bg-[#2C3E2D]/30 backdrop-blur-xl rounded-xl border border-[#2C3E2D]/10 p-4 h-[calc(100vh-12rem)] overflow-y-auto">
+            <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl rounded-xl border border-[#819A91]/20 p-4 h-[calc(100vh-12rem)] overflow-y-auto">
               {selectedConversation ? (
                 <div className="space-y-4">
                   <h2 className="text-lg font-semibold text-[#2C3E2D] mb-4">
