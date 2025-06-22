@@ -41,14 +41,10 @@ const ConversationDetail: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await fetch(getApiUrl(`/api/conversations/${id}`));
-        if (!response.ok) {
-          throw new Error('Failed to fetch conversation');
-        }
-        const data = await response.json();
-        console.log('Fetched conversation data:', data); // Debug log
-        console.log('Messages:', data.messages); // Debug messages specifically
-        setConversation(data);
+        const response = await axios.get(getApiUrl(`/api/conversations/${id}`));
+        console.log('Fetched conversation data:', response.data); // Debug log
+        console.log('Messages:', response.data.messages); // Debug messages specifically
+        setConversation(response.data);
       } catch (err) {
         console.error('Error details:', err);
         setError(err instanceof Error ? err.message : 'Failed to load conversation');
