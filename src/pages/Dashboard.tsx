@@ -8,7 +8,7 @@ import { getApiUrl } from "../config/api";
 interface UserStats {
   totalCalls: number;
   averageDuration: number;
-  lastPractice: string | null;
+  lastActivity: string | null;
   sentimentBreakdown: {
     positive: number;
     negative: number;
@@ -76,10 +76,10 @@ const Dashboard: React.FC = () => {
     return `${minutes}m ${seconds % 60}s`;
   };
 
-  const getLastPracticeText = (lastPractice: string | null): string => {
-    if (!lastPractice) return "Never";
+  const getLastActivityText = (lastActivity: string | null): string => {
+    if (!lastActivity) return "Never";
     try {
-      return formatDistanceToNow(new Date(lastPractice), { addSuffix: true });
+      return formatDistanceToNow(new Date(lastActivity), { addSuffix: true });
     } catch {
       return "Never";
     }
@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
                 Welcome back, {user?.name}!
               </h1>
               <p className="text-[#5A6B5B]">
-                Ready to practice your conversation skills?
+                Monitor your automated customer service performance.
               </p>
             </div>
             <Link
@@ -141,7 +141,7 @@ const Dashboard: React.FC = () => {
                 </h2>
               </div>
               <p className="text-[#5A6B5B]">
-                Review your past conversations and track your progress
+                Review customer interactions and monitor service performance
               </p>
             </Link>
 
@@ -164,12 +164,12 @@ const Dashboard: React.FC = () => {
                   </svg>
                 </div>
                 <h2 className="text-xl font-semibold text-[#2C3E2D]">
-                  Your Stats
+                  Service Metrics
                 </h2>
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-[#5A6B5B]">Total Calls</span>
+                  <span className="text-[#5A6B5B]">Customer Interactions</span>
                   <span className="text-[#2C3E2D] font-medium">
                     {loading ? "..." : stats?.totalCalls || 0}
                   </span>
@@ -183,21 +183,21 @@ const Dashboard: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[#5A6B5B]">Last Practice</span>
+                  <span className="text-[#5A6B5B]">Last Activity</span>
                   <span className="text-[#2C3E2D] font-medium">
                     {loading
                       ? "..."
-                      : getLastPracticeText(stats?.lastPractice || null)}
+                      : getLastActivityText(stats?.lastActivity || null)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[#5A6B5B]">Total Messages</span>
+                  <span className="text-[#5A6B5B]">Messages Processed</span>
                   <span className="text-[#2C3E2D] font-medium">
                     {loading ? "..." : stats?.totalMessages || 0}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[#5A6B5B]">Companies</span>
+                  <span className="text-[#5A6B5B]">Business Contexts</span>
                   <span className="text-[#2C3E2D] font-medium">
                     {loading
                       ? "..."
@@ -226,7 +226,7 @@ const Dashboard: React.FC = () => {
                   </svg>
                 </div>
                 <h2 className="text-xl font-semibold text-[#2C3E2D]">
-                  Sentiment Breakdown
+                  Customer Satisfaction
                 </h2>
               </div>
               {loading ? (
@@ -273,12 +273,12 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="ml-3">
                 <h3 className="text-lg font-medium text-[#2C3E2D] mb-2">
-                  Ready to try out CustomerCare VoiceAI?
+                  CustomerCare VoiceAI Demo
                 </h3>
                 <p className="text-[#5A6B5B]">
-                  Test out a conversation with Sigma, our customer service
-                  representative. Use CustomerCare VoiceAI to build your own
-                  agent for your organization.
+                  Experience automated customer service with Sigma, our AI
+                  representative. Configure CustomerCare VoiceAI to handle
+                  customer inquiries for your business.
                 </p>
               </div>
             </div>
